@@ -18,10 +18,10 @@ class ModelTests(TestCase):
     def test_create_vessel(self):
         """Test Creating a vessel is Successful."""
         vessel = models.Vessel.objects.create(
-            name="Alaskan Voyager",
+           vessel_name = "Alaskan Voyager",
         )
 
-        self.assertEqual(str(vessel), vessel.name)
+        self.assertEqual(str(vessel), vessel.vessel_name)
 
     
     def test_create_vesselschedule(self):
@@ -31,8 +31,9 @@ class ModelTests(TestCase):
             voyage_number= 12345,
             arrival_date=datetime.now(),
         )
-        vesselschedule_result = "{}-{}.format(vessel, voyage_number)"
-       
+
+        vesselschedule_result = str(vesselschedule.vessel) + '-' + str(vesselschedule.voyage_number)
+    
         self.assertEqual(str(vesselschedule), vesselschedule_result)
 
 #here
@@ -40,21 +41,20 @@ class ModelTests(TestCase):
         """Test Creating a Bill of landing is Successful."""
         billoflanding = models.BillOfLanding.objects.create(
             voyage=create_vessel(),
-            bol_number = 14328,
+            bol_number = "14328",
             contact_name="John Smith",
             contact_number = 8435679000,
             contact_email="js@av.com",
             release_status = "R",
         )
-        runway_result = "{}{}.format(runway_number, runway_designation)"
         
-        self.assertEqual(billoflanding, billoflanding.bol_number)
+        self.assertEqual(str(billoflanding), billoflanding.bol_number)
 
     def test_create_container(self):
         """Test Creating a container is Successful."""
         billoland= models.BillOfLanding.objects.create(
             voyage=create_vessel(),
-            bol_number = 14328,
+            bol_number = "14328",
             contact_name="John Smith",
             contact_number = 8435679000,
             contact_email="js@av.com",
