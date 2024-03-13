@@ -1,30 +1,26 @@
 from rest_framework import serializers
-from core.models import Airline, Airport, Runway, Flight
+from core.models import Vessel, VesselSchedule, Container, BillOfLanding
 
-class AirlineSerializer(serializers.ModelSerializer):
+class VesselSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Airline
-        fields = ['name', 'airline_code'] #fields "airport, runway_number, length, width" was not working
+        model = Vessel
+        fields = ['vessel_name'] 
         read_only_fields = ['id']
 
-class RunwaySerializer(serializers.ModelSerializer):
+class VesselScheduleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Runway
-        fields = ['airport', 'runway_number', 'runway_designation', 'length', 'width']
+        model = VesselSchedule
+        fields = ['vessel', 'voyage_number', 'arrival_date']
         read_only_fields = ['id']
 
-class FlightSerializer(serializers.ModelSerializer):
+class BillOfLandingSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Flight
-        fields = ['origin', 'destination', 'airline', 'departure', 'arrival', 'flight_number','aircraft_type']
+        model = BillOfLanding
+        fields = ['voyage', 'bol_number', 'contact_name', 'contact_number', 'contact_email', 'release_status']
         read_only_fields = ['id']
 
-class AirportSerializer(serializers.ModelSerializer):
-    flight_origin = FlightSerializer(many=True, read_only=True)
-    flight_destination = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    runways = RunwaySerializer(many=True, read_only=True)
+class ContainerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Airport
-        fields = ['name', 'airport_code', 'address', 'city', 'state', 'zip_code', 'runways', 'flight_origin',
-'flight_destination']
+        model = Container
+        fields = ['bol', 'container_number']
         read_only_fields = ['id']
