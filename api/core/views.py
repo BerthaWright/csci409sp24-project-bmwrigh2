@@ -1,25 +1,22 @@
 from django.shortcuts import render
-
-# Create your views here.
-
-from django.shortcuts import render
 from rest_framework import viewsets
-from core.models import Airline, Airport, Flight, Runway
-from core.serializers import AirlineSerializer, AirportSerializer, FlightSerializer, RunwaySerializer
+from core.models import Vessel, BillOfLanding, Container, VesselSchedule
+from core.serializers import VesselSerializer, BillOfLandingSerializer, VesselScheduleSerializer, ContainerSerializer
 # Create your views here.
 
-class AirportViewSet(viewsets.ModelViewSet):
-    queryset = Airport.objects.all()
-    serializer_class =  AirportSerializer
+class VesselViewSet(viewsets.ModelViewSet):
+    queryset = Vessel.objects.all()
+    serializer_class =  VesselSerializer
 
-class AirlineViewSet(viewsets.ModelViewSet):
-    queryset = Airline.objects.all()
-    serializer_class =  AirlineSerializer
+class VesselScheduleViewSet(viewsets.ModelViewSet):
+    queryset = VesselSchedule.objects.all()
+    serializer_class =  VesselScheduleSerializer
     
-class RunwayViewSet(viewsets.ModelViewSet):
-    queryset = Runway.objects.all()
-    serializer_class =  RunwaySerializer
-
-class FlightViewSet(viewsets.ModelViewSet):
-    queryset = Flight.objects.all()
-    serializer_class =  FlightSerializer
+class BillOfLandingViewSet(viewsets.ModelViewSet):
+    queryset = BillOfLanding.objects.all()
+    serializer_class =  BillOfLandingSerializer
+    
+    
+class ContainerViewSet(viewsets.ModelViewSet):
+   queryset = Container.objects.all()
+   serializer_class = ContainerSerializer
